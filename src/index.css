@@ -1,0 +1,136 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-walnut: #38271f;
+  --color-wood: #80634d;
+  --color-wood-ink: #68503e;
+  --color-oak: #c9a77c;
+  --color-cream: #ede4d6;
+  --color-ivory: #f8f6f1;
+  --color-charcoal: #25211e;
+  --color-muted: #5f5349;
+  --color-line: #ddd2c2;
+  --color-whatsapp: #1d6f47;
+  --color-whatsapp-dark: #165738;
+
+  --font-serif: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slow-zoom: slow-zoom 14s ease-out both;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-fade: fade 0.4s ease-out;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+
+  @keyframes slow-zoom {
+    from {
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal[data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 4rem;
+  /* Section di luar layar tidak dihitung dulu, sehingga halaman panjang lebih ringan. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+
+  @media (min-width: 64rem) {
+    padding-block: 6.5rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    color: var(--color-walnut);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-wood);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
